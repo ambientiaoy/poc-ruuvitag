@@ -2,6 +2,10 @@
 cd "$(dirname "$0")"
 NAME="ruuvifw"
 VERSION=$(git rev-parse --short HEAD)
+
+SDK_ROOT := ../../../../nRF5_SDK_15.2.0_9412b96
+#SDK_ROOT := ../../../../nRF5_SDK_15.3.0_59ac345
+
 while getopts "n:v:" option;
 do
 case "${option}"
@@ -26,7 +30,7 @@ else
 fi
 
 nrfutil settings generate --family NRF52 --application _build/nrf52832_xxaa.hex --application-version 1  --bootloader-version 1 --bl-settings-version 1 settings.hex 
-mergehex -m ../../../../nRF5_SDK_15.2.0_9412b96/components/softdevice/s132/hex/s132_nrf52_6.1.0_softdevice.hex $BOOTLOADER settings.hex -o sbc.hex
+mergehex -m $SDK_ROOT/components/softdevice/s132/hex/s132_nrf52_6.1.0_softdevice.hex $BOOTLOADER settings.hex -o sbc.hex
 mergehex -m sbc.hex _build/nrf52832_xxaa.hex -o packet.hex
 
 rm ruuvitag_b_armgcc*$NAME*.hex

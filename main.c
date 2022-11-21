@@ -49,7 +49,7 @@ int main(void)
                       "Running extended self-tests, this might take a while\r\n");
   // Print unit test status, activate tests by building in DEBUG configuration under SES
   size_t tests_run, tests_passed;
-  ruuvi_driver_test_gpio_cfg_t gpio_test_cfg = {.input = RUUVI_BOARD_BUTTON_1, .output = 31};
+  ruuvi_driver_test_gpio_cfg_t gpio_test_cfg = {{.input = RUUVI_BOARD_BUTTON_1, .output = 31}};
   ruuvi_driver_test_gpio_cfg(gpio_test_cfg);
   ruuvi_driver_test_all_run(print_test);
   ruuvi_driver_test_status(&tests_run, &tests_passed);
